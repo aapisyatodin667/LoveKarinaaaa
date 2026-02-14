@@ -54,3 +54,27 @@
 
 </body>
 </html>
+
+<audio id="bg-music" loop autoplay>
+    <source src="audio/song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+    // Попытка автостарт через JS
+    const music = document.getElementById('bg-music');
+    document.addEventListener('DOMContentLoaded', () => {
+        const playPromise = music.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                // Включение после первого клика, если блокирует браузер
+                document.body.addEventListener('click', () => music.play(), { once: true });
+            });
+        }
+    });
+</script>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
